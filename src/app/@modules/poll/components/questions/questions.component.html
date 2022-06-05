@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<ng-container>
+  <div style="z-index: 999;" class="w-100 mt-2 position-fixed d-flex justify-content-center">
+    <mat-card class="panel">
+      <mat-card-header>
+        <mat-card-title class="title">
+          {{ textEvaluationCollaborator() }}
+        </mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="loadedQuestions">
+  <div class="container my-4">
+    <div class="row">
+      <div class="col-md-12">
+        <mat-nav-list>
+          <mat-card *ngFor="let question of questions | questionPagination: actualPage: responses"
+            style="margin: 40px 30px;">
+            <mat-card-header>
+              <mat-card-title [matBadge]="question.id" matBadgePosition="before">
+                &nbsp;&nbsp;&nbsp;<span style="font-size: 20px;">{{ question.text }}</span>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <mat-radio-group [(ngModel)]="question.idOption">
+                <mat-radio-button color="accent" *ngFor="let option of question.options" [value]="option.id"
+                  (click)="responseQuestion(question, option.id)" style="margin-left: 30px; margin-top: 5px;">
+                  {{ option.text }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </mat-card-content>
+          </mat-card>
+        </mat-nav-list>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="display: flex; justify-content: center;">
+        <button (click)="updateQuestions(-1)" [disabled]="actualPage === 0" mat-stroked-button class="button mr-1"
+          style="margin-right: 20px;">
+          &nbsp;&#xab;Anterior
+        </button>
+        <button (click)="updateQuestions(+1)" mat-stroked-button class="button ml-1">
+          {{ isCompletedQuestions() ? 'Finalizar' : 'Siguiente' }}&nbsp;&#xbb;
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

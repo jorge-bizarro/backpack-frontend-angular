@@ -1,0 +1,21 @@
+button {
+  font-family: neue-plak-semibold;
+  text-transform: lowercase;
+}
+
+button::first-letter {
+  text-transform: capitalize;
+}
+
+.indicator {
+  box-shadow: 0 1px 2px 1px;
+  padding: 0 2px 2px 2px;
+  font-size: 1rem;
+  font-family: neue-plak-semibold;
+  color: #6802c1;
+}
+
+.fullname {
+  font-size: .9rem;
+  font-weight: 600;
+}

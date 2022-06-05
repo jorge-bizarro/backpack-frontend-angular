@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: neue-plak-regular;
+  src: url('assets/fonts/Neue\ Plak\ Narrow\ Regular.ttf');
+}
+
+@font-face {
+  font-family: neue-plak-ligth;
+  src: url('assets/fonts/Neue\ Plak\ Light.ttf');
+}
+
+@font-face {
+  font-family: neue-plak-semibold;
+  src: url('assets/fonts/Neue\ Plak\ SemiBold.ttf');
+}
+
+@import '~@angular/material/theming';
+
+$custom-typography: mat-typography-config(
+  $font-family: neue-plak-regular
+);
+
+@include mat-core($custom-typography);
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.title {
+  font-family: neue-plak-semibold;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0px 2px 1px -1px rgba(143, 83, 216, 0.7), 
+              0px 1px 1px 0px rgba(143, 83, 216, 0.7), 
+              0px 1px 3px 0px rgba(143, 83, 216, 0.7)
+}
+
+mat-card-title, mat-card-actions {
+  text-align: center;
+}
+
+.mat-card-header .mat-card-title {
+  margin-bottom: 0 !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle,
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple),
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+.mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background-color: #ea0303;
+}
+
+mat-card-header.header-custom > .mat-card-header-text {
+  width: 100%;
+  margin: 0 !important;
+}
+
+.mat-option-text {
+  display: flex !important;
+  justify-content: center;
+}

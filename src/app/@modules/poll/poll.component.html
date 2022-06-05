@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<ng-container>
+  <div class="container">
+    <div class="row col-12 mt-2">
+      <mat-card class="panel">
+        <mat-card-header>
+          <mat-card-title class="title">
+            {{ respondent.fullName }}, a continuación, verás las evaluaciones que tienes pendientes de realizar. De
+            acuerdo a tu avance, podrás verificar tu progreso desde tu autoevaluación, evaluación de tus pares, de las
+            personas a tu cargo (si las tuvieras) y de tu jefe.
+          </mat-card-title>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>
+
+<div class="container mt-4" *ngIf="collaborators?.length > 0">
+  <div class="row col-md-12 text-center justify-content-center">
+    <div class="col-md-3 col-sm-12 title">
+      <div>
+        Autoevaluación
+        <span [class]="indicatorMe >= limitResponsesByType('ME') ? 'indicator-success' : 'indicator-warn'"
+          [matTooltip]="messageIndicatorMe" matTooltipPosition="below" matTooltipHideDelay="100">
+          {{ indicatorMe }} / {{ limitResponsesByType('ME') }}
+        </span>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 title">
+      <div>
+        Pares
+        <span [class]="indicatorPair >= limitResponsesByType('PAIR') ? 'indicator-success' : 'indicator-warn'"
+          [matTooltip]="messageIndicatorPair" matTooltipPosition="below" matTooltipHideDelay="100">
+          {{ indicatorPair }} / {{ limitResponsesByType('PAIR') }}
+        </span>
+      </div>
+      <mat-card class="mt-4 notification title"
+        [hidden]="!(userService.showNotificationPair | async) || limitResponsesByType('PAIR') == 0">
+        <mat-card-content style="color: #212322; font-size: 14px; line-height: 17px;">
+          Has completado {{ indicatorPair }} de {{ limitResponsesByType('PAIR') }} encuestas que debes realizar como
+          mínimo.
+          Recuerda que, si te es posible completar la mayor cantidad de evaluaciones posibles porque tus pares
+          esperan obtener feedback de tu parte.
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="title" mat-stroked-button
+            style="font-size: 13px; text-transform: uppercase; color: white; background-color: #6802c1;"
+            (click)="hideNotificationPair()">
+            Entendido
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-md-3 col-sm-12 title" *ngIf="showColumnStaffInCharge()">
+      <div>
+        Personas a mi cargo
+        <span
+          [class]="indicatorCollaborator >= this.limitResponsesByType('COLLABORATOR') ? 'indicator-success' : 'indicator-warn'"
+          [matTooltip]="messageIndicatorCollaborator" matTooltipPosition="below" matTooltipHideDelay="100">
+          {{ indicatorCollaborator }} / {{ this.limitResponsesByType('COLLABORATOR') }}
+        </span>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 title">
+      <div>
+        Jefe
+        <span [class]="indicatorBoss >= limitResponsesByType('BOSS') ? 'indicator-success' : 'indicator-warn'"
+          [matTooltip]="messageIndicatorBoss" matTooltipPosition="below" matTooltipHideDelay="100">
+          {{ indicatorBoss }} / {{ limitResponsesByType('BOSS') }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row col-md-12 my-2">
+    <div class="line"></div>
+  </div>
+  <div class="row col-md-12 justify-content-center">
+    <div class="col-md-3 col-sm-12">
+      <app-collaborator-list [collaborators]="collaborators" type="ME" (onSelectCollaborator)="showPoll($event)"
+        (onIndicator)="onIndicator($event)">
+      </app-collaborator-list>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <app-collaborator-list [collaborators]="collaborators" type="PAIR" (onSelectCollaborator)="showPoll($event)"
+        (onIndicator)="onIndicator($event)">
+      </app-collaborator-list>
+    </div>
+    <div class="col-md-3 col-sm-12" *ngIf="showColumnStaffInCharge()">
+      <app-collaborator-list [collaborators]="collaborators" type="COLLABORATOR"
+        (onSelectCollaborator)="showPoll($event)" (onIndicator)="onIndicator($event)">
+      </app-collaborator-list>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <app-collaborator-list [collaborators]="collaborators" type="BOSS" (onSelectCollaborator)="showPoll($event)"
+        (onIndicator)="onIndicator($event)">
+      </app-collaborator-list>
+    </div>
+  </div>
+</div>

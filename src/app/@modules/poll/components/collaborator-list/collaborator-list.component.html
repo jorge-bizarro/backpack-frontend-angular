@@ -1,0 +1,22 @@
+<mat-nav-list>
+  <mat-card *ngFor="let collaborator of listCollaborators" class="mb-2">
+    <mat-card-header style="display: flex;" class="header-custom">
+      <mat-card-title>
+        <div class="fullname" [style.margin-right]="type === 'PAIR' ? '5px' : '0'">
+          {{ collaborator.fullName }}
+        </div>
+      </mat-card-title>
+      <div style="margin-left: auto;" *ngIf="type === 'PAIR'">
+        <span class="indicator" matTooltip="Número de personas que le evaluaron" matTooltipPosition="below"
+          matTooltipHideDelay="100">
+          {{ collaborator.totalRespondents }}
+        </span>
+      </div>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-stroked-button [style.color]="collaborator.color" (click)="onSelect(collaborator)">
+        {{ collaborator.status }}&nbsp;&#xbb;
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</mat-nav-list>

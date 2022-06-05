@@ -1,0 +1,1719 @@
+<div class="row justify-content-md-center">
+  <div class="col-md-2" style="position: fixed; left: 5%;">
+    <div class="indice c-purple-1 p-4" style="border-radius: 2px;">
+      <div class="title mt-2 center">
+        ÍNDICE
+      </div>
+      <button mat-stroked-button (click)="scrollToElement(zeroStep)" class="w-100 my-2">
+        Resúmen
+      </button>
+      <button mat-stroked-button (click)="scrollToElement(firstStep)" class="w-100 mb-2">
+        1. Modelo ESCI
+      </button>
+      <button mat-stroked-button (click)="scrollToElement(secondStep)" class="w-100 mb-2">
+        2. Interpretando tu feedback
+      </button>
+      <button mat-stroked-button (click)="scrollToElement(thirdStep)" class="w-100 mb-2">
+        3. Resumen del ESCI
+      </button>
+      <button mat-stroked-button (click)="scrollToElement(fourthStep)" class="w-100 mb-2">
+        4. Detalle del ESCI
+      </button>
+      <button mat-stroked-button (click)="scrollToElement(fifthStep)" class="w-100 mb-2">
+        5. Acciones de mejora
+      </button>
+    </div>
+
+    <button mat-stroked-button (click)="exportPDF()" style="background-color: #6802c1; color: #fff;
+      font-weight: bold;" class="w-100 mt-4" [disabled]='exportingToPDF'>
+      <div style="display: flex; align-items: center;">
+        <span>
+          {{ exportingToPDF ? 'Exportando...' : 'Exportar a PDF' }}
+        </span>
+        <span style="padding: 7px;" [hidden]="!exportingToPDF">
+          <mat-spinner diameter="20" color="warn"></mat-spinner>
+        </span>
+      </div>
+    </button>
+  </div>
+
+  <div class="col-md-1"></div>
+
+  <div class="col-md-8">
+    <div class="page" #zeroStep>
+      <table class="header bg-purple-1">
+        <tr>
+          <td class="left">
+            <img class="logo" src="backpack/assets/img/Recurso 3.png" alt="UC-LOGO">
+          </td>
+          <td class="right">
+            <span class="title c-white text-median text-upper">
+              Evaluación de Liderazgo - ESCI
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <table class="mini-header">
+        <tr>
+          <td class="center">
+            <span class="title c-purple-1 text-big">
+              Reporte de Evaluación de Liderazgo – ESCI
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <table class="mini-header">
+        <tr>
+          <td class="center text-median">
+            <span>
+              Evaluado(a): {{ userInformation.fullName }}
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <table class="summary">
+        <tr>
+          <td>
+            <span class="title">
+              Resumen:
+            </span>
+          </td>
+        </tr>
+
+        <tr class="step"></tr>
+
+        <tr class="item">
+          <td class="center">
+            <img src="backpack/assets/img/Recurso 4.png" alt="UC-LOGO">
+          </td>
+          <td>
+            <span class="title">
+              Periodo de evaluación:
+            </span>
+            <table>
+              <tr>
+                <td>
+                  <span>
+                    {{ period }}
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="step"></tr>
+
+        <tr class="item">
+          <td class="center">
+            <img src="backpack/assets/img/Recurso 19.png" alt="UC-LOGO" style="margin-right: 10px;">
+            <img src="backpack/assets/img/Recurso 18.png" alt="UC-LOGO">
+          </td>
+          <td>
+            <span class="title">
+              Cantidad de evaluadores:
+            </span>
+            <table>
+              <tr class="center list-h">
+                <td>
+                  Autoevaluación
+                </td>
+                <td>
+                  Pares
+                </td>
+                <td>
+                  Personas a cargo
+                </td>
+                <td>
+                  Líder
+                </td>
+              </tr>
+              <tr class="center">
+                <td>
+                  {{ summaryRespondent.ME }}
+                </td>
+                <td>
+                  {{ summaryRespondent.PAIR }}
+                </td>
+                <td>
+                  {{ summaryRespondent.COLLABORATOR }}
+                </td>
+                <td>
+                  {{ summaryRespondent.BOSS }}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="step"></tr>
+
+        <!-- <tr class="item">
+          <td class="center">
+            <img src="backpack/assets/img/Recurso 1.png" alt="UC-LOGO">
+          </td>
+          <td>
+            <span class="title">
+              Resultados por clúster:
+            </span>
+            <table>
+              <tr class="center list-h">
+                <td>
+                  {{ summaryClusters[0].name }}
+                </td>
+                <td>
+                  {{ summaryClusters[1].name }}
+                </td>
+              </tr>
+              <tr class="center">
+                <td>
+                  {{ summaryClusters[0].value }}
+                </td>
+                <td>
+                  {{ summaryClusters[1].value }}
+                </td>
+              </tr>
+              <tr class="mini-step">
+              </tr>
+              <tr class="center list-h">
+                <td>
+                  {{ summaryClusters[2].name }}
+                </td>
+                <td>
+                  {{ summaryClusters[3].name }}
+                </td>
+              </tr>
+              <tr class="center">
+                <td>
+                  {{ summaryClusters[2].value }}
+                </td>
+                <td>
+                  {{ summaryClusters[3].value }}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr class="step"></tr>-->
+
+        <tr class="item">
+          <td class="center">
+            <img src="backpack/assets/img/Recurso 2.png" alt="UC-LOGO">
+          </td>
+          <td>
+            <span>
+              Resultado final*:
+            </span>
+            <br>
+            <span class="title">
+              {{ percent }}
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <table class="footer" style="margin-top: 40px; padding-right: 3cm;">
+        <tr>
+          <td class="justify note">
+            <span class="text-small">
+              * El resultado final se obtiene considerando las repuestas positivas de los
+              evaluadores: pares, personas a cargo y jefe, sobre el total de respuestas
+              posibles. Adicionalmente, de acuerdo al perfil del colaborador/a se da un
+              mayor o menor peso a los resultados de sus evaluadores. Ver Condiciones
+              para Cálculo.
+            </span>
+          </td>
+          <!-- <td style="width: 100%; display: flex; align-items: center; justify-content: center;">
+            <img src="backpack/assets/img/Recurso 9.png" alt="">
+          </td> -->
+        </tr>
+      </table>
+
+      <div style="display: flex; justify-content: center; margin-top: .5cm;">
+        <img src="backpack/assets/img/Recurso 9.png" alt="">
+      </div>
+
+      <div style="height: 1cm;"></div>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <p>
+        <strong class="text-big c-purple-1">
+          ¿Qué es el liderazgo para la UC?
+        </strong>
+      </p>
+
+      <p>
+        En la Universidad Continental sabemos que todos y todas somos líderes y que, al mismo tiempo, cada día uno puede crecer como líder y como profesional. Entendemos a (el/la) líder UC como un líder que se conoce a sí mismo, que gestiona sus emociones y conecta con l@s demás para conseguir un propósito compartido. Que se orienta al logro, es empático, y trabaja en equipo. La orientación al propósito, al aprendizaje y a los resultados es sumamente importante como parte de la cultura UC.
+      </p>
+
+      <p>
+        La propuesta de liderazgo de la UC integra el concepto de liderazgo auténtico, las competencias socio-emocionales, y las cinco dimensiones del liderazgo, que se explicarán más adelante y toman como referencia al liderazgo co-activo.
+      </p>
+
+      <p>
+        <strong>
+          El(la) líder UC es un líder auténtico,
+        </strong>
+        se fortalece y construye a partir de su historia de vida, propósito y autoconocimiento. Y se desarrolla a partir de habilidades que contribuyan a empoderar y ayudar a crecer a los demás, en un liderazgo orientado hacia los demás. El liderazgo auténtico se evalúa desde cuatro componentes: (1) consciencia de uno mismo, (2) transparencia relacional, (3) perspectiva moral internalizada, y (4) procesamiento balanceado.
+      </p>
+
+      <p>
+        <strong>
+          El liderazgo tiene un componente esencial basado en la dimensión emocional,
+        </strong>
+        que se tangibiliza en competencias socioemocionales, y este se transmite desde el ejemplo.  La conciencia de las fortalezas y debilidades, dentro del marco de las competencias de inteligencia emocional, es un gran activo para que un(a) líder pueda crecer cada día.
+      </p>
+
+      <p>
+        <strong>
+          Las competencias socioemocionales son doce
+        </strong>
+        y las entendemos como principios de liderazgo, que son: (1) autoconsciencia emocional, (2) autocontrol emocional, (3) orientación al logro, (4) mirada positiva, (5) adaptabilidad, (6) empatía, (7) conciencia organizacional, (8) influencia, (9) coach y mentor(a), (10) manejo de conflictos, (11) liderazgo inspirador y (12) trabajo en equipo.
+      </p>
+
+      <p>
+        <strong>
+          El liderazgo es también multidimensional.
+        </strong>
+        En concordancia con el liderazgo co-activo, consideramos que existen cinco dimensiones. La
+        <strong>
+          primera dimensión
+        </strong>
+        es el liderazgo interno, pues siempre nos estamos liderando, y tiene como competencias clave la aceptación y autoridad con un@ mism@, se centra en tomar responsabilidad al aceptarse plenamente y vivir una vida de acuerdo a los valores de uno mismo.
+      </p>
+
+      <p>
+        La
+        <strong>
+          segunda
+        </strong>
+        es cuando el(la) líder está al frente, liderando un equipo. Las competencias más importantes son conexión con los demás y claridad en la dirección y propósito. La
+        <strong>
+          tercera dimensión
+        </strong>
+        es cuando el(la) líder está detrás: en vez de buscar verse bien frente a todos, el líder detrás busca servir y hacer coaching a su equipo, proveyendo lo que sea necesario para que l@s demás brillen, escuchando activamente y fortaleciendo la confianza en los demás.
+      </p>
+
+      <p>
+        La
+        <strong>
+          cuarta
+        </strong>
+        es cuando el(la) líder está al lado; eso se suele dar cuando lideramos algo junto a alguien. Las competencias clave son las de generar alianzas y sinergias alrededor de un propósito compartido. La quinta es cuando el(la) líder está en el campo. Se da cuando tomamos responsabilidad sobre nuestro impacto en el mundo, y las competencias clave son intuición e innovación.
+      </p>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <p>
+        <strong class="text-big c-purple-1">
+          ¿Qué es la Inteligencia Emocional y Social?
+        </strong>
+      </p>
+
+      <p>
+        La inteligencia emocional y social es la capacidad de reconocer nuestros propios sentimientos y los de los
+        demás, para motivarnos a nosotros mismos, y para manejar las emociones de manera efectiva en nosotros mismos y
+        en los demás. Eso describe los comportamientos que sostienen a las personas en roles desafiantes, o a medida
+        que sus carreras se vuelven más exigentes, y captura las cualidades que ayudan a las personas a afrontar
+        eficazmente el cambio.
+      </p>
+
+      <p>
+        <strong class="text-big c-purple-1">
+          El Inventario de Competencias
+          <br>
+          Emocionales y sociales (ESCI)
+        </strong>
+      </p>
+
+      <p>
+        Basado en décadas de investigación, en cientos de roles y organizaciones, el Inventario de Competencias
+        Emocionales y Sociales (ESCI, por sus iniciales en inglés) describe 12 competencias. Aunque todas las
+        competencias de ESCI son importantes, es posible que sea necesario dominarlas todas para ser exitoso. Puede
+        basarse en diferentes competencias, dependiendo de sus fortalezas, preferencias y de las necesidades de las
+        personas y situaciones con las que trabaja.
+      </p>
+
+      <p>
+        <strong class="text-median c-purple-1">
+          Los cuatro clusters (o grupos)
+        </strong>
+      </p>
+
+      <p>
+        Los clusters o grupos de ESCI provienen de la conceptualización de la inteligencia emocional, y son:
+      </p>
+
+      <p style="padding-left: 4em;">
+        I. Autoconciencia: reconocer y comprender nuestras propias emociones. <br>
+        II. Comprensión de otros: reconocer y comprender las emociones de otros. <br>
+        III. Gestión de uno mismo: gestionar eficazmente nuestras propias emociones. <br>
+        IV. Gestión de las relaciones: aplicar la comprensión emocional en el trato con los demás.
+      </p>
+
+      <p>
+        La Gestión de relaciones es donde la inteligencia emocional y social (o la falta de ella) se vuelve más
+        visible para los demás. Las competencias en este clúster impactan en la motivación y desempeño de otros, pero
+        dependen de las fortalezas en las competencias de Comprensión de Otros y Gestión de uno mismo. Estos grupos
+        proporcionan dirección, energía, moderación y habilidad en la forma en que usamos en las competencias de
+        Gestión de relaciones.
+      </p>
+
+      <p>
+        La Autoconciencia está en el corazón del modelo. Describe la capacidad para comprender nuestras emociones,
+        nuestros impulsos, nuestras fortalezas y debilidades. Nos permite sostener nuestro comportamiento emocional y
+        socialmente inteligente a lo largo del tiempo, a pesar de las dificultades que podamos encontrar en el camino.
+      </p>
+
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <p>
+        <strong class="text-big c-purple-1">
+          Tu reporte de Feedback:
+        </strong>
+      </p>
+
+      <p>
+        Tu reporte de feedback está organizado en estas 5 secciones:
+      </p>
+
+      <p style="padding-left: 4em;">
+        1. Modelo ESCI: una lista de las competencias medidas en este reporte, organizadas por cluster. <br>
+        2. Interpretando tu Feedback: Una guía de lo que vas a ver en el reporte de feedback de ESCI. <br>
+        3. Resumen del ESCI: Un resumen de tus fortalezas y áreas de mejora en los cuatro clusters de competencias
+        emocionales. <br>
+        4. Detalle del ESCI: Los resultados detallados de las competencias, por grupo que evalúa, con las definiciones
+        de
+        las competencias. <br>
+        5. Posibles acciones de mejora: una lista de posibles acciones de mejora que puedes implementar.
+      </p>
+
+      <div #firstStep>
+        <p>
+          <strong class="text-big c-purple-1">
+            1. Modelo ESCI
+          </strong>
+        </p>
+      </div>
+
+      <p>
+        Modelo de Competencias Emocionales y sociales
+      </p>
+
+      <div>
+        <table style="margin: 0 auto;" class="center text-median">
+          <tr>
+            <td class="bg-light-orange t-box text-bold" style="width: 200px;">
+              Autoconciencia
+            </td>
+            <td class="bg-light-purple-2 t-box text-bold">
+              Gestión de uno mismo
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light-purple-1 t-box text-bold" style="width: 200px;">
+              Comprensión de otros
+            </td>
+            <td class="bg-light-blue t-box text-bold">
+              Gestión de las relaciones
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <table>
+        <tr>
+          <td class="w-50">
+            <p class="text-bold">
+              Autoconsciencia
+            </p>
+            <p>
+              Conocer y comprender las fortalezas y debilidades. Impulsos y valores de cada uno, y el impacto en los
+              demás. Implica reconocer cómo tus
+              propios sentimientos te afectan y también a los
+              demás
+            </p>
+          </td>
+          <td class="center">
+            <table class="w-100">
+              <tr>
+                <td>
+                  <div style="display: inline;">
+                    <div class="bg-light-orange t-box text-center"
+                      style="margin: 0 auto; display: table-cell; vertical-align: middle; padding: 0 10px; width: 150px; height: 50px;">
+                      1. Autoconocimiento emocional
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <div class="mini-step"></div>
+
+      <table>
+        <tr>
+          <td class="center">
+            <table class="w-100">
+              <tr>
+                <td>
+                  <div style="display: inline;">
+                    <div class="text-center"
+                      style="margin: 0 auto; display: table-cell; vertical-align: middle; padding: 0 10px;">
+                      <table>
+                        <tr>
+                          <td class="t-box" style="border: 1px solid white; padding: 5px; width: 150px; height: 50px;"
+                            class="bg-light-purple-2">
+                            2. Autocontrol
+                          </td>
+                          <td class="t-box" style="border: 1px solid white; padding: 5px; width: 150px; height: 50px;"
+                            class="bg-light-purple-2">
+                            3. Adaptabilidad
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="t-box" style="border: 1px solid white; padding: 5px; width: 150px; height: 50px;"
+                            class="bg-light-purple-2">
+                            4. Orientación al logro
+                          </td>
+                          <td class="t-box" style="border: 1px solid white; padding: 5px; width: 150px; height: 50px;"
+                            class="bg-light-purple-2">
+                            5. Mirada positiva
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="w-50">
+            <p class="text-bold right">
+              Gestión de uno mismo
+            </p>
+            <p class="right">
+              Controlar o redirigir impulsos y estados de
+              ánimo disruptivos. Como menciona Goleman, las personas que están en control de
+              sus emociones e impulsos son las que
+              pueden crear un ambiente de confianza y
+              justicia.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <table>
+        <tr>
+          <td class="w-50">
+            <p class="text-bold">
+              Comprensión de otros
+            </p>
+            <p>
+              Se refiere a cómo las personas pueden
+              manejar sus relaciones y conciencia de los
+              sentimientos, necesidades y preocupaciones de los demás
+            </p>
+          </td>
+          <td class="center">
+            <table class="w-100">
+              <tr>
+                <td>
+                  <div style="display: inline;">
+                    <div class="text-center"
+                      style="margin: 0 auto; display: table-cell; vertical-align: middle; padding: 0 10px;">
+                      <table>
+                        <tr>
+                          <td class="t-box" style="width: 150px; height: 50px; border: 1px solid white; padding: 5px;"
+                            class="bg-light-purple-1">
+                            6. Empatía
+                          </td>
+                          <td class="t-box" style="width: 150px; height: 50px; border: 1px solid white; padding: 5px;"
+                            class="bg-light-purple-1">
+                            7. Conciencia emocional
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+      </table>
+
+      <div class="mini-step"></div>
+
+      <table>
+        <tr>
+          <td class="center">
+            <table class="w-100">
+              <tr>
+                <td>
+                  <div style="display: inline;">
+                    <div class="text-center"
+                      style="margin: 0 auto; display: table-cell; vertical-align: middle; padding: 0 10px;">
+                      <table>
+                        <tr>
+                          <td class="t-box" style="width: 150px; height: 50px; border: 1px solid white; padding: 5px;"
+                            class="bg-light-blue">
+                            8. Influencia
+                          </td>
+                          <td class="t-box" style="width: 150px; height: 50px; border: 1px solid white; padding: 5px;"
+                            class="bg-light-blue">
+                            9. Coach y mentor
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="t-box" style="width: 150px; height: 50px; border: 1px solid white; padding: 5px;"
+                            class="bg-light-blue">
+                            10. Liderazgo inspiracional
+                          </td>
+                          <td class="t-box" style="width: 150px; height: 50px; border: 1px solid white; padding: 5px;"
+                            class="bg-light-blue">
+                            11. Manejo de conflictos
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="t-box" style="width: 150px; height: 50px; border: 1px solid white; padding: 5px;"
+                            class="bg-light-blue">
+                            12. Trabajo en equipo
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td class="w-50">
+            <p class="text-bold right">
+              Gestión de las relaciones
+            </p>
+            <p class="right">
+              Comprende la habilidad o destreza para
+              inducir respuestas deseables en los
+              demás.
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      <div class="mini-step"></div>
+
+      <div #secondStep>
+        <p>
+          <strong class="text-big c-purple-1">
+            2. Interpretando tu feedback:
+          </strong>
+        </p>
+      </div>
+
+
+      <p>
+        <strong>
+          Interpretando el Resumen de ESCI:
+        </strong>
+      </p>
+
+      <p>
+        El resumen de ESCI muestra una mirada general de tus fortalezas y áreas de mejora. Todas las competencias
+        medidas en este reporte son listadas y medidas por cluster.
+      </p>
+
+      <p>
+        <strong>
+          Resultados de las Competencias
+        </strong>
+      </p>
+
+      <p>
+        Hacia la derecha de cada competencia podrás ver el promedio de la evaluación que te han hecho los demás. Esto
+        es el promedio de la evaluación todos, excluyendo tu autoevaluación.
+      </p>
+
+      <p>
+        <strong>
+          Ejemplo:
+        </strong>
+      </p>
+
+      <div class="mini-step"></div>
+
+      <div class="center">
+        <img src="backpack/assets/img/report-cluster.png" alt="." srcset="" class="w-75">
+      </div>
+
+      <div class="mini-step"></div>
+
+      <p>
+        La barra representa el puntaje Total de otros. El círculo representa su calificación o cómo se vio a sí mismo
+        en esa competencia.
+      </p>
+
+      <p>
+        <strong>
+          Normas:
+        </strong>
+        el cuadro transparente representa el grupo de normas. Eso es el puntaje que van desde el percentil 25
+        al percentil 75 de otros que han realizado esta encuesta. El grupo de normas que se muestra representa
+        {{ totalDeEvaluados }} encuestados que participaron en la ESCI UC.
+        <br>
+        Si su puntaje Total de otros (representado por la barra) está a la izquierda de este cuadro, indica que su
+        puntuación está por debajo del promedio para esta competencia.
+      </p>
+
+      <p>
+        Si su puntaje Total de otros está a la derecha del cuadro, indica que está por encima del promedio en esta
+        competencia. Cuando la puntuación Total de Otros coincide o supera el 85% de la escala, la competencia se
+        considera una fortaleza. En este caso, una flecha aparecerá para esa competencia debajo de la columna de
+        fortaleza.
+      </p>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <p class="text-bold">
+        Interpretando el detalle de tu competencia
+      </p>
+
+      <p>
+        El detalle de tus competencias de ESCI te muestra los resultados por grupo evaluador para cada una de las
+        competencias medidas en este reporte.
+      </p>
+
+      <p>
+        Escalas de las competencias: En el gráfico podrás ver las barras que representan a los diferentes grupos que
+        te han evaluado.
+      </p>
+      
+      <p>
+        <strong>
+          Ejemplo:
+        </strong>
+      </p>
+
+      <div class="mini-step"></div>
+
+      <p class="center">
+        <img src="backpack/assets/img/report-cluster-detail.png" alt="." srcset="" class="w-75">
+      </p>
+
+      <p>
+        Normas: el área sombreada representa el grupo de normas o rango promedio de puntajes (es decir, percentil 25 a
+        75) para esta competencia. Cuando una barra está por encima del área sombreada, su calificación se considera
+        por encima del promedio para esta competencia. Cuando una barra está por debajo del área sombreada, se
+        considera por debajo del promedio para esta competencia.
+      </p>
+
+      <div #thirdStep>
+        <p>
+          <strong class="text-big c-purple-1">
+            3. Resumen del ESCI
+          </strong>
+        </p>
+      </div>
+
+      <div class="report-table">
+        <table class="w-100">
+          <thead style="font-weight: bold;">
+            <td style="border: none !important">
+              Cluster|Competencia
+            </td>
+            <td style="text-align: center; width: 60px; border: none !important">
+              Promedio de evaluación de otros
+            </td>
+            <td style="text-align: center; border: none !important">
+              Consistencia de la demostración
+            </td>
+          </thead>
+          <tr style="border-bottom: 1px solid black;">
+            <td style="border: none !important">&nbsp;</td>
+            <td style="border: none !important">&nbsp;</td>
+            <td style="border: none !important">
+              <table class="w-100">
+                <tr>
+                  <td class="w-20">Nunca</td>
+                  <td class="w-20">Raramente</td>
+                  <td class="w-20">A veces</td>
+                  <td class="w-20">Frecuentemente</td>
+                  <td class="w-20">Consistentemente</td>
+                </tr>
+              </table>
+            </td>
+            <td style="text-align: right; border: none !important">
+              Fortaleza
+            </td>
+          </tr>
+          <tbody *ngFor="let report of reportData">
+            <tr>
+              <td>
+                <span style="color: #2b3880; font-weight: bold;">
+                  {{ report.habilityName }}
+                </span>
+                <br>
+              </td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr *ngFor="let reportInfo of report.data">
+              <td style="padding-top: 0px; ">
+                <span style="padding-left: 7px; ">
+                  {{ reportInfo.clusterName }}
+                </span>
+              </td>
+              <td style="padding-top: 0px; text-align: center;">
+                {{ reportInfo.medianOthers }}
+              </td>
+              <td style="padding-top: 6px !important;">
+                <div id="container">
+                  <div id="progreso" [style.width]="reportInfo.medianOthers * 20 + '%'"
+                    style="background-color: #70CFEB; padding-top: 2px;">&nbsp;</div>
+                  <div id="rectangulo" [style.left]="(reportInfo.percentile25 * 20) + '%'"
+                    [style.width]="((reportInfo.percentile75-reportInfo.percentile25) * 20) + '%' ">&nbsp;</div>
+                  <div id="circulo" *ngIf="reportInfo.medianAuto>=0.25"
+                    [style.left]="(reportInfo.medianAuto * 20)-5 + '%'">&nbsp;</div>
+                  <div id="circulo" *ngIf="reportInfo.medianAuto<0.25" style="left:0%">&nbsp;</div>
+                </div>
+              </td>
+              <td>
+                <i *ngIf="reportInfo.Paso75" class="star"></i>
+              </td>
+            </tr>
+            <tr style="border-top: 1px solid #E2E3E5;">
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div #fourthStep>
+      <div *ngFor="let numberPage of pages">
+        <div class="mini-step"></div>
+
+        <div class="page page-m">
+          <table class="header">
+            <tr>
+              <td class="right">
+                <span class="c-light-blue">
+                  Organización Educativa Continental
+                </span>
+              </td>
+            </tr>
+          </table>
+
+          <div class="line bg-light-blue"></div>
+
+          <div class="step"></div>
+
+          <div *ngIf="numberPage === 1">
+            <p class="text-bold text-big c-purple-1">
+              4. Detalle del ESCI
+            </p>
+          </div>
+
+          <mat-card style="width: 100%;" *ngFor="let cluster of clustersDetail(numberPage)"
+            style="margin-bottom: 20px;">
+            <mat-card-header>
+              <mat-card-title>
+                <span style="color: #252c5c">
+                  {{ cluster.habilityName }}
+                </span>
+                <p></p>
+                <h3 style="color: #2b3880">
+                  {{ cluster.clusterName }}
+                </h3>
+              </mat-card-title>
+            </mat-card-header>
+
+
+            <mat-card-content style="height: 150px; display: flex;">
+
+              <div class="container" style="margin: auto;">
+
+                <table
+                  style="box-shadow: 0px 0px 0px 1px #212322; border-radius: 2px; border-collapse: collapse !important;">
+                  <tr>
+                    <td rowspan="5" width="15%" class="tdcluster">
+                      <div class="barrarosada" [style.bottom]="(cluster.percentile25 * 20) + 'px'"
+                        [style.height]="((cluster.percentile75-cluster.percentile25) * 20) + 'px'">&nbsp;</div>
+                      <span class="indicador">{{ cluster.medianOthers }}</span>
+                      <div class="barraceleste" [style.height]="cluster.medianOthers * 20 + 'px'">&nbsp;</div>
+                    </td>
+                    <td rowspan="5" width="15%" class="tdcluster">
+                      <div class="barrarosada" [style.bottom]="(cluster.percentile25 * 20) + 'px'"
+                        [style.height]="((cluster.percentile75-cluster.percentile25) * 20) + 'px'">&nbsp;</div>
+                      <span class="indicador">{{ cluster.medianAuto }}</span>
+                      <div class="barraceleste" [style.height]="cluster.medianAuto * 20 + 'px'">&nbsp;</div>
+                    </td>
+                    <td rowspan="5" width="15%" class="tdcluster">
+                      <div class="barrarosada" [style.bottom]="(cluster.percentile25 * 20) + 'px'"
+                        [style.height]="((cluster.percentile75-cluster.percentile25) * 20) + 'px'">&nbsp;</div>
+                      <span class="indicador">{{ cluster.medianBoss }}</span>
+                      <div class="barraceleste" [style.height]="cluster.medianBoss * 20 + 'px'">&nbsp;</div>
+                    </td>
+                    <td rowspan="5" width="15%" class="tdcluster" *ngIf="cluster.employeeType == 'JEFE'">
+                      <div class="barrarosada" [style.bottom]="(cluster.percentile25 * 20) + 'px'"
+                        [style.height]="((cluster.percentile75-cluster.percentile25) * 20) + 'px'">&nbsp;</div>
+                      <span class="indicador">{{ cluster.medianCollaborator }}</span>
+                      <div class="barraceleste" [style.height]="cluster.medianCollaborator * 20 + 'px'">&nbsp;</div>
+                    </td>
+                    <td rowspan="5" width="15%" class="tdcluster">
+                      <div class="barrarosada" [style.bottom]="(cluster.percentile25 * 20) + 'px'"
+                        [style.height]="((cluster.percentile75-cluster.percentile25) * 20) + 'px'">&nbsp;</div>
+                      <span class="indicador">{{ cluster.medianPair }}</span>
+                      <div class="barraceleste" [style.height]="cluster.medianPair * 20 + 'px'">&nbsp;</div>
+                    </td>
+                    <td style="padding-left: 10px;">Consistentemente</td>
+                  </tr>
+                  <tr>
+                    <td style="padding-left: 10px;">Frecuentemente</td>
+                  </tr>
+                  <tr>
+                    <td style="padding-left: 10px;">A veces</td>
+                  </tr>
+                  <tr>
+                    <td style="padding-left: 10px;">Raramente</td>
+                  </tr>
+                  <tr>
+                    <td style="padding-left: 10px;">Nunca</td>
+                  </tr>
+                  <tr style="font-weight: bold; text-align: center;">
+                    <td>Total Otros</td>
+                    <td>AutoEv</td>
+                    <td>Jefe</td>
+                    <td *ngIf="cluster.employeeType == 'JEFE'">Pers. a Cargo</td>
+                    <td>Pares</td>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <div #fifthStep>
+        <p class="text-bold text-big c-purple-1">
+          5. Posibles acciones de mejora
+        </p>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <div>
+        <table style="margin: 0 auto;" class="center w-75">
+          <tr>
+            <td class="bg-light-orange t-box text-bold">
+              Autoconciencia
+            </td>
+            <td class="bg-light-purple-2 t-box text-bold">
+              Gestión de uno mismo
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light-purple-1 t-box text-bold">
+              Comprensión de otros
+            </td>
+            <td class="bg-light-blue t-box text-bold">
+              Gestión de las relaciones
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <p>
+        A continuación, te presentamos algunas posibles acciones de mejora para que realices en los componentes que
+        quieras mejorar, luego los puedes plasmar en tu Plan de crecimiento.
+      </p>
+
+      <div class="min-step"></div>
+
+      <p class="text-bold text-median c-purple-1">
+        Auto-consciencia
+      </p>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median">
+        Autoconocimiento emocional
+      </p>
+
+      <div class="mini-step"></div>
+
+      <div style="display: table;" class="justify">
+        <div class="w-50" style="display: table-cell; padding-right: 15px;">
+          <li>
+            Ten un registro de tus emociones a lo largo del día. Y pídele feedback a alguien en quien confíes sobre
+            qué
+            emociones ve en ti en determinados momentos (podrían ser en reuniones de equipo, o en interacciones
+            cotidianas
+            en general). Luego contrasta la información del registro de tus emociones con el feedback de los demás.
+          </li>
+        </div>
+        <div style="display: table-cell; padding-left: 15px;">
+          <li>
+            Antes de cada reunión o interacción con otras personas, pon como intención qué emociones quisieras
+            transmitir
+            hacia los demás. Luego de la reunión haz un autoanálisis, y también pide feedback a quien consideres que
+            te
+            lo
+            pueda dar.
+          </li>
+        </div>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median c-purple-1">
+        Gestión de uno mismo
+      </p>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median">
+        Autocontrol emocional
+      </p>
+
+      <div class="mini-step"></div>
+
+      <div style="display: table;" class="justify">
+        <div class="w-50" style="display: table-cell; padding-right: 15px;">
+          <li>
+            Ten un registro de cómo las situaciones en el trabajo, o las interacciones con los demás influyen en tus
+            emociones. Mientras más específico sea, mejor. Puedes nombrar la emoción inicial, y la que surgió con la
+            situación determinada, y evaluar si tu reacción es la que hubieras querido inicialmente. Sumado a esto,
+            puedes
+            pedir feedback o retroalimentación luego de reuniones o interacciones, específicamente en cómo
+            gestionaste
+            tus
+            emociones y reacciones.
+          </li>
+        </div>
+        <div style="display: table-cell; padding-left: 15px;">
+          <li>
+            Haz lo posible por tomar conciencia, en situaciones retadoras, de cómo te estás sintiendo (una reunión
+            difícil, un día sobrecargado, etc.). Una vez que cobras conciencia de la emoción que sientes podrás
+            reflexionar acerca
+            de las posibles causas, y de cómo ésta podría estar afectando en tus decisiones o acciones posteriores.
+            El
+            primer
+            paso es identificar las emociones que tenemos, luego puedes hacerte cargo de ellas y gestionarlas de
+            manera
+            que no afecten tu día.
+          </li>
+        </div>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median">
+        Adaptabilidad
+      </p>
+
+      <div class="mini-step"></div>
+
+      <table class="w-100">
+        <tr>
+          <td class="justify w-50" style="padding-right: 15px;">
+            <li>
+              Puedes pedir feedback o retroalimentación respecto a tu capacidad para adaptarte a situaciones
+              cambiantes
+              y
+              superar obstáculos en una situación específica.
+            </li>
+
+            <p></p>
+
+            <li>
+              Puedes tener un registro diario de las situaciones que te han retado y que te han costado, y elaborar
+              acciones
+              de mejora para el día siguiente. Puedes compartir estos retos y avances con algún par en quien confíes
+              para
+              el
+              feedback, o con tu jefe.
+            </li>
+          </td>
+          <td class="right">
+            <img src="backpack/assets/img/Recurso 16.png" alt=" " srcset="">
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <p class="text-bold text-median">
+        Orientación al logro
+      </p>
+
+      <div class="mini-step"></div>
+
+      <div style="display: table;" class="justify">
+        <div class="w-50" style="display: table-cell; padding-right: 15px;">
+          <li>
+            Genera momentos de reflexión, pueden ser espacios de 30 minutos, donde te respondas las siguientes
+            preguntas: ¿Qué quiero lograr profesionalmente en las próximas tres semanas? ¿Qué quiero lograr a nivel
+            personal en las próximas tres semanas? ¿Qué me está limitando para tener un mejor desempeño? ¿Cómo se
+            vería
+            la excelencia aplicada a mi trabajo?
+          </li>
+        </div>
+        <div style="display: table-cell; padding-left: 15px;">
+          <li>
+            Establece para cada día, semana y mes: qué resultado esperas, por qué es importante para ti alcanzarlo,
+            y
+            acciones concretas que te permitirán hacerlo. Tener metas claras que te motiven, y hacerle un
+            seguimiento
+            diario, puede fortalecer tu orientación al logro.
+          </li>
+          <p></p>
+          <li>
+            Plantea metas retadoras pero alcanzables.
+          </li>
+        </div>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median">
+        Mirada positiva
+      </p>
+
+      <div class="mini-step"></div>
+
+      <div style="display: table;" class="justify">
+        <div class="w-50" style="display: table-cell; padding-right: 15px;">
+          <li>
+            Pide retroalimentación tanto a tus pares como a tu jefe y equipo sobre tu capacidad de ver el lado
+            positivo
+            en
+            las situaciones y personas. Luego de recibir el feedback, incorpóralo para que en cada interacción y
+            reto
+            puedas ver las posibilidades y las potencialidades, y las oportunidades de aprendizaje.
+          </li>
+        </div>
+        <div style="display: table-cell; padding-left: 15px;">
+          <li>
+            Busca personas que identifiques que tienen una mirada positiva frente a situaciones y personas, y
+            entrevístalas para entender qué los ayuda a ver el lado positivo.
+          </li>
+          <p></p>
+          <li>
+            Haz el ejercicio de, luego de una interacción difícil (una reunión, alguna conversación incómoda) buscar
+            qué
+            cosas positivas tuvo la situación.
+          </li>
+        </div>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median c-purple-1">
+        Comprensión de otros
+      </p>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median">
+        Empatía
+      </p>
+
+      <div class="mini-step"></div>
+
+      <div style="display: table;" class="justify">
+        <div class="w-50" style="display: table-cell; padding-right: 15px;">
+          <li>
+            Genera espacios para conversar con tus compañeros de trabajo, para poder entender mejor sus vidas, retos
+            y
+            aspiraciones.
+          </li>
+          <p></p>
+          <li>
+            Aplica la comunicación no violenta (ver Marshall Rosenberg): observa primero en ti qué sentimientos y
+            necesidades tienes. Luego haz lo mismo con la otra persona, buscando entender qué sentimientos y
+            necesidades
+            tiene. Luego de esto, en caso sea necesario, ya puedes hacer algún pedido, expresado de manera clara,
+            descriptiva y respetuosa.
+          </li>
+        </div>
+        <div style="display: table-cell; padding-left: 15px;">
+          <li>
+            Haz el esfuerzo por considerar a la otra persona en todas sus dimensiones (no solo en el ámbito laboral
+            sino
+            en su rol como hijo, padre, hermana, etc.).
+          </li>
+          <p></p>
+          <li>
+            Si algo de otra persona te incomoda o molesta, pregúntate ¿qué aspecto mío podría estar reflejándose en
+            esta
+            interacción? ¿Lo que me molesta de esta persona es algo que se vincula a mi forma de ser?
+          </li>
+        </div>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <table class="w-100">
+        <tr>
+          <td class="justify w-50" style="padding-right: 15px;">
+            <p class="text-bold text-median">
+              Conciencia organizacional
+            </p>
+
+            <div class="mini-step"></div>
+
+            <li>
+              Luego de una reunión, pregúntale a otra persona que estuvo presente sobre qué leyó del grupo, respecto
+              a
+              las
+              emociones que estuvieron presentes, y a la dinámica que se dio. También pueden reflexionar sobre cómo
+              se
+              tomaron decisiones.
+            </li>
+          </td>
+          <td class="right" style="padding-top: 60px;">
+            <img src="backpack/assets/img/Recurso 16.png" alt=" " srcset="">
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <p class="text-bold text-median c-purple-1">
+        Gestión de las relaciones
+      </p>
+
+      <div class="mini-step"></div>
+
+      <table class="w-100">
+        <tr>
+          <td class="w-50">
+            <div class="justify">
+              <div>
+                <p class="text-bold text-median">
+                  Influencia
+                </p>
+
+                <li>
+                  Entiende cuáles son las motivaciones y aspiraciones de tus pares y equipo, para que sea más
+                  posible
+                  alinearse alrededor de un propósito compartido.
+                </li>
+              </div>
+
+              <div class="mini-step"></div>
+
+              <div>
+                <p class="text-bold text-median">
+                  Coach y mentor
+                </p>
+
+                <div class="mini-step"></div>
+
+                <li>
+                  Genera espacios de feedback uno a uno, y enfócate en escuchar al otro, y en hacerle preguntas
+                  abiertas,
+                  sin
+                  juicio, y centradas en su experiencia. Esto te ayudará a entender qué aspiraciones y retos tiene,
+                  y qué lo está limitando para conseguirlas.
+                </li>
+              </div>
+
+              <div class="mini-step"></div>
+
+              <div>
+                <p class="text-bold text-median">
+                  Liderazgo inspiracional
+                </p>
+
+                <div class="mini-step"></div>
+
+                <li>
+                  Inspírate y conéctate con el propósito de la organización, para que sea más fácil que inspires a
+                  otros.
+                </li>
+              </div>
+            </div>
+          </td>
+
+          <td class="center">
+            <div class="w-50" style="margin: auto;">
+              <table>
+                <tr>
+                  <td class="right">
+                    <img src="backpack/assets/img/Recurso 19.png" alt="UC-LOGO" class="w-100">
+                  </td>
+                  <td>
+                    <div style="width: 20px;"></div>
+                  </td>
+                  <td class="left">
+                    <img src="backpack/assets/img/Recurso 18.png" alt="UC-LOGO" class="w-100">
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median">
+        Manejo de conflictos
+      </p>
+
+      <div class="mini-step"></div>
+
+      <div style="display: table;" class="justify">
+        <div class="w-50" style="display: table-cell; padding-right: 15px;">
+          <li>
+            Harvard (Fisher y Uri, 2012) propone estos 4 pasos para gestionar mejores conflictos, puedes aplicarlos:
+          </li>
+          <p></p>
+          <li>
+            Separa a las personas del problema: ayuda que ambas partes comuniquen sus expectativas, que puedan hacer
+            el
+            ejercicio de ponerse en el lugar del otro, que haya mucha escucha, y que se sostenga una comunicación
+            respetuosa y asertiva.
+          </li>
+        </div>
+        <div style="display: table-cell; padding-left: 15px;">
+          <li>
+            Enfócate en intereses, no en problemas: en esta etapa ambas partes deben de preguntarse qué intereses
+            tienen
+            ellas mismas, y la otra parte. El enfocarse en intereses ayuda en ver hacia adelante y no hacia atrás.
+          </li>
+          <p></p>
+          <li>
+            Desarrolla opciones donde ambas partes ganen: las partes que están en conflicto deben de idear
+            alternativas
+            y
+            opciones que ofrezcan ventajas a ambas partes. Para se puede sugerir algo que satisfaga el interés de la
+            otra
+            parte y que le cueste menos. El foco en algo que sea ganar ganar ayuda mucho.
+          </li>
+        </div>
+      </div>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold text-median">
+        Trabajo en equipo
+      </p>
+
+      <div class="mini-step"></div>
+
+      <div style="display: table;" class="justify">
+        <div class="w-50" style="display: table-cell; padding-right: 15px;">
+          <li>
+            Genera un espacio de seguridad psicológica, de modo que las personas sientan la confianza para hablar, y
+            para
+            expresar sus ideas.
+          </li>
+        </div>
+        <div style="display: table-cell; padding-left: 15px;">
+          <li>
+            Elimina las posibles distracciones de las reuniones, incluido el multitasking, para que tu equipo pueda
+            concentrarse en el momento presente y tener mejores resultados.
+          </li>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <div class="step"></div>
+
+      <p class="text-bold text-big c-purple-1">
+        Plan de crecimiento personal
+      </p>
+
+      <div class="mini-step"></div>
+
+      <p>
+        De acuerdo a la información que has recibido en tu reporte de liderazgo, puedes plantearte dos o
+        tres metas específicas:
+      </p>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold">
+        Acciones que voy a realizar para mejorar mi liderazgo
+      </p>
+
+      <div class="mini-step"></div>
+
+      <table class="w-100">
+        <tr>
+          <td class="center" style="padding: 0 5px 0 20px; width: 25%;">
+            <div>
+              <img src="backpack/assets/img/Recurso 2.png" alt="" srcset="" style="height: 60px;">
+            </div>
+            <div>
+              Acción
+            </div>
+            <div class="mini-step"></div>
+            <div class="c-light-blue" style="border: 2px solid; height: 100px;"></div>
+          </td>
+
+          <td class="center" style="width: 25%; padding: 0 5px;">
+            <div>
+              <img src="backpack/assets/img/Recurso 1.png" alt="" srcset="" style="height: 60px;">
+            </div>
+            <div>
+              Resultado esperado
+            </div>
+            <div class="mini-step"></div>
+            <div class="c-light-blue" style="border: 2px solid; height: 100px;"></div>
+          </td>
+
+          <td class="center" style="padding: 0 20px 0 5px; width: 25%;">
+            <div>
+              <img src="backpack/assets/img/Recurso 9.png" alt="" srcset="" style="height: 60px;">
+            </div>
+            <div>
+              Rango de tiempo
+            </div>
+            <div class="mini-step"></div>
+            <div class="c-light-blue" style="border: 2px solid; height: 100px;"></div>
+          </td>
+        </tr>
+      </table>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold">
+        ¿Cómo voy a monitorear mi progreso?
+      </p>
+
+      <div class="mini-step"></div>
+
+      <table class="w-100">
+        <tr>
+          <td style="width: 150px;">
+            <img src="backpack/assets/img/Recurso 21.png" alt="" srcset="" style="height: 60px;">
+          </td>
+          <td style="padding-left: 20px;">
+            <div class="c-light-blue" style="border: 2px solid; height: 200px;"></div>
+          </td>
+        </tr>
+      </table>
+
+      <div class="mini-step"></div>
+
+      <p class="text-bold">
+        Recursos o apoyo que voy a necesitar para lograr mi plan de crecimiento.
+      </p>
+
+      <div class="mini-step"></div>
+
+      <table class="w-100">
+        <tr>
+          <td style="width: 150px;">
+            <img src="backpack/assets/img/Recurso 20.png" alt="" srcset="" style="height: 60px;">
+          </td>
+          <td style="padding-left: 20px;">
+            <div class="c-light-blue" style="border: 2px solid; height: 200px;"></div>
+          </td>
+        </tr>
+      </table>
+
+      <div class="step"></div>
+
+      <table class="w-100">
+        <tr>
+          <td class="center">
+            <img src="backpack/assets/img/Recurso 9.png" alt="" srcset="">
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="mini-step"></div>
+
+    <div class="page page-m">
+
+      <table class="header">
+        <tr>
+          <td class="right">
+            <span class="c-light-blue">
+              Organización Educativa Continental
+            </span>
+          </td>
+        </tr>
+      </table>
+
+      <div class="line bg-light-blue"></div>
+
+      <p class="text-bold text-big c-purple-1" style="margin-top: 150px;">
+        Condiciones para Cálculo
+      </p>
+      
+      <div class="mini-step"></div>
+
+      <p>
+        <span class="text-bold">
+          Sin personas a cargo        
+        </span>
+        <br>
+        Su resultado debe dar pesos: 60% al resultado del jefe y 40% al resultado de pares.
+        <br>
+        Mínimo para que su resultado sea válido: jefe + 1 par. Si no cumple: NV= No Válido.
+      </p>
+
+      <div class="mini-step"></div>
+
+      <p>
+        Reportes de Presidencia sin personas a cargo
+        <br>
+        Su resultado considera solo a pares con un peso de 100%.
+        <br>
+        Mínimo para que su resultado sea válido: 3 pares como mínimo. Si no cumple: NV
+      </p>
+
+      <div class="mini-step"></div>
+
+      
+      <p>
+        <span class="text-bold">
+          Con personas a cargo
+        </span>
+        <br>
+        Su resultado debe dar pesos: 50% al resultado de personas a cargo, 35% de jefe y 15% al resultado
+        de pares.
+        <br>
+        Mínimo para que su resultado sea válido: jefe + 50% de sus personas a cargo. Si no cumple: NV
+        Si no tiene evaluación de pares, el 15% de peso de pares se divide equitativamente entre jefe y
+        personas a cargo: personas a cargo 57.5%, jefe 42.5%.
+      </p>
+
+      <div class="mini-step"></div>
+
+      <p>
+        Primera línea y reportes de Presidencia
+        <br>
+        Su resultado debe dar pesos: 50% al resultado de personas a cargo, 35% de jefe y 15% al resultado
+        de pares.
+        <br>
+        Mínimo para que su resultado sea válido: 75% de sus personas a cargo + 1 par. Si no cumple: NV
+        Si no tiene evaluación de su jefe, el 35% de la evaluación de su jefe se repartirá equitativamente
+        entre pares y personas a cargo: personas a cargo: 67.5%; pares: 32.5%.
+      </p>
+
+      <div style="height: 150px;"></div>
+    </div>
+
+    <div class="page bg-purple-1" style="margin-top: 10px;">
+      <table class="w-100" style="padding: 3cm;">
+        <tr>
+          <td class="left">
+            <img class="logo" style="height: 70px;" src="backpack/assets/img/Recurso 3.png" alt="UC-LOGO">
+          </td>
+        </tr>
+      </table>
+
+      <div class="step"></div>
+      <div class="line-bolder bg-light-blue"></div>
+      <div class="line-bolder bg-light-blue"></div>
+      <div class="line-bolder bg-light-blue"></div>
+      <div class="line-bolder bg-light-blue"></div>
+      <div class="line-bolder bg-light-blue"></div>
+      <div class="line-bolder bg-light-blue"></div>
+
+      <table class="w-100" style="padding: 0 3cm;">
+        <tr>
+          <td class="right">
+            <div class="c-light-blue" style="display: inline-block;">
+              <table>
+                <tr class="center">
+                  <td>
+                    <img src="backpack/assets/img/Recurso 25.png" alt="" srcset="">
+                  </td>
+                  <td>
+                    <img src="backpack/assets/img/Recurso 26.png" alt="" srcset="">
+                  </td>
+                  <td>
+                    <img src="backpack/assets/img/Recurso 27.png" alt="" srcset="">
+                  </td>
+                  <td>
+                    <img src="backpack/assets/img/Recurso 28.png" alt="" srcset="">
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    ucontinental.edu.pe
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>

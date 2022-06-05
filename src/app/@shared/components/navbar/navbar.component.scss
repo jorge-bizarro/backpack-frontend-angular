@@ -1,0 +1,19 @@
+.nav-bar {
+  overflow: hidden;
+  background-color: #303030;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  color: #f4f4f4;
+}
+
+.panel {
+  background-color: #6802c1;
+  color: #6802c1;
+
+  .title {
+    color: #f2f2f2;
+    font-size: 1rem;
+  }
+}
